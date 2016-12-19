@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'whatwg-fetch';
-import PokeList from './components/PokeList';
-import SelectItemsPerPageButtons from './components/SelectItemsPerPageButtons';
-import { Col, Pagination } from 'react-bootstrap/lib/';
+import PokemonIndexList from './components/PokemonIndexList';
 
 class App extends Component {
 
@@ -17,7 +15,8 @@ class App extends Component {
       limit: 50,
       offset: 0,
       totalPages: 0,
-      count: 0
+      count: 0,
+      loaded: false
     };
 
     this.loadPokemon = this.loadPokemon.bind(this);
@@ -37,7 +36,8 @@ class App extends Component {
         this.setState({
           pokemon: json.results,
           totalPages: pages,
-          count: json.count
+          count: json.count,
+          loaded: true
         });
         console.log(this.state);
       })
@@ -73,22 +73,21 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Pokemon Dashboard</h2>
         </div>
 
-        <SelectItemsPerPageButtons options={[10,50,100,200]} selectedValue={this.state.limit} allValue={this.state.count} onOptionSelected={this.handleLimitChange}/>
-        <Col sm={8} md={10} smOffset={2} mdOffset={1}>
-          <PokeList listOfPokemon={this.state.pokemon} />
-        </Col>
+        {this.state.loaded ? null : "Loading..."}
 
-        <Col sm={12} >
-          <Pagination
-            bsSize="small"
-            items={this.state.totalPages}
-            activePage={this.state.activePage}
-            onSelect={this.handlePaginationSelect}
-          />
-        </Col>
+        <PokemonIndexList
+          display={this.state.loaded}
+          options={[10,50,100,200]}
+          selectedValue={this.state.limit} allValue={this.state.count} onOptionSelected={this.handleLimitChange}
+          listOfPokemon={this.state.pokemon}
+          bsSize="small"
+          items={this.state.totalPages}
+          activePage={this.state.activePage}
+          onSelect={this.handlePaginationSelect}
+          totalPages={this.state.totalPages} />
       </div>
     );
   }
