@@ -1,21 +1,12 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap/lib/';
 
-const PokemonModal = ({openModal, closeModal, showModal, pokemon}) => {
+const PokemonModal = ({closeModal, showModal, pokemon}) => {
   return (
     <div>
-        <Button
-          bsStyle="primary"
-          bsSize="large"
-          onClick={openModal}
-        >
-          Launch contained modal
-        </Button>
-
         <Modal
           show={showModal}
-          onHide={closeModal}
-        >
+          onHide={closeModal} >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title">Contained Modal</Modal.Title>
           </Modal.Header>

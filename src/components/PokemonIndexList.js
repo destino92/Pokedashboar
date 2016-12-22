@@ -3,7 +3,7 @@ import SelectItemsPerPageButtons from './SelectItemsPerPageButtons';
 import PaginationContainer from './PaginationContainer';
 import PokeList from './PokeList';
 
-const PokemonIndexList = ({display, options, selectedValue, allValue, onOptionSelected, listOfPokemon, btnSize, totalPages, activePage, onSelect}) => {
+const PokemonIndexList = ({display, options, selectedValue, allValue, onOptionSelected, listOfPokemon, btnSize, totalPages, activePage, onSelect, openModal}) => {
 
   let Style = { display: 'none'}
 
@@ -17,7 +17,8 @@ const PokemonIndexList = ({display, options, selectedValue, allValue, onOptionSe
     <div style={Style}>
       <SelectItemsPerPageButtons options={options} selectedValue={selectedValue} allValue={allValue} onOptionSelected={onOptionSelected} />
 
-      <PokeList listOfPokemon={listOfPokemon} />
+      <PokeList listOfPokemon={listOfPokemon}
+      openModal={openModal} />
 
       <PaginationContainer btnSize={btnSize}
       totalPages={totalPages}

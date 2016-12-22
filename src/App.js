@@ -72,7 +72,11 @@ class App extends Component {
     })
   }
 
-  handleModalOpen(){
+  handleModalOpen(pokemon){
+    console.log(pokemon);
+    if(pokemon.url !== undefined) {
+      
+    }
     this.setState({
       showModal: true
     });
@@ -103,9 +107,10 @@ class App extends Component {
           items={this.state.totalPages}
           activePage={this.state.activePage}
           onSelect={this.handlePaginationSelect}
-          totalPages={this.state.totalPages} />
+          totalPages={this.state.totalPages}
+          openModal={this.handleModalOpen} />
 
-          <PokemonModal openModal={this.handleModalOpen}
+          <PokemonModal
           closeModal={this.handleModalClose}
           showModal={this.state.showModal} />
       </div>
